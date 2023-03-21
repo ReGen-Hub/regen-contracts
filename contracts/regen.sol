@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 //import "openzeppelin-solidity/contracts/access/Roles.sol";
 // Uncomment this line to use console.log
-// import "hardhat/console.sol";
+//import "hardhat/console.sol";
 
 contract Regen is Ownable {
    //using Roles for Roles.Role;
@@ -69,12 +69,12 @@ contract Regen is Ownable {
       _description,
       _category,
       _price,
-      _imageCid,
       _carbonFootprint,
-      block.timestamp
+      _imageCid
+      //block.timestamp
       )));
 
-   
+      //console.log(productId);
       products[productId] = Product (
          _name,
          _description,
