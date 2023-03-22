@@ -12,6 +12,7 @@ contract Regen is Ownable {
    // Roles.Role buyers; // Stores Buyer Roles
   
    mapping (uint => Product) public products;
+   mapping (address => uint) public rewards;
 
    // Product struct
    struct Product {
@@ -87,6 +88,7 @@ contract Regen is Ownable {
          new address[](0),
          msg.sender
       );
+      rewards[msg.sender] = _price /100;
 
     emit ProductCreated(
       productId,
@@ -99,11 +101,16 @@ contract Regen is Ownable {
       require(products[_productId].currentOwner == msg.sender, "You do not own this product.");
         products[_productId].previousOwners.push(msg.sender);
         products[_productId].currentOwner = _to;
+        rewards[_to] = products[_productId].price /10;
         emit ProductTransferred(_productId, msg.sender, _to);
    }
 
    function getProduct(uint _productId) public view returns (Product memory) {
       return (products[_productId]);
+   }
+
+   function getReward(address addr) public view returns (uint) {
+      return (rewards[addr]);
    }
    
 
