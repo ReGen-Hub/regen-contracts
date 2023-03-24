@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Regen is Ownable {
     using Counters for Counters.Counter;
+    mapping (address => string) zeroWaste;
 
     // Structures
     struct Product {
@@ -29,6 +30,7 @@ contract Regen is Ownable {
         address buyer;
         uint256 purchaseDate;
     }
+
     Product[] productstructs;
 
     Order[] private orders;
@@ -221,4 +223,13 @@ totalRewardsRedeemed += customerRewards[products[i].currentOwner];
 }
 return totalRewardsRedeemed;
 }
+
+function createZeroWaste (string memory cid) public {
+   zeroWaste[msg.sender] = cid;
+}
+
+function getZeroWaste () public view returns (string memory){
+   return (zeroWaste[msg.sender]);
+}
+
 }
